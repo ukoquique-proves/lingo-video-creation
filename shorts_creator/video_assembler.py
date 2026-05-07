@@ -276,7 +276,8 @@ class VideoAssembler:
                     color=self.config.font_color, stroke_color=self.config.stroke_color,
                     stroke_width=self.config.stroke_width, method='caption',
                     size=(self.config.width - 100, None), align='center'
-                ).with_duration(clip.duration).with_position(
+                ).with_duration(clip.duration)
+                txt = txt.with_position(
                     ('center', self.config.height - self.config.caption_margin - txt.h)
                 )
                 clip = CompositeVideoClip([clip, txt])
