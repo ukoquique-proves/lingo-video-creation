@@ -129,6 +129,7 @@ output/shorts/
 
 ## Documentation
 
+- `VIDEO_CREATION.md` - **User guide: how to create videos**
 - `QUICKSTART.md` - Quick start guide
 - `shorts_creator/README.md` - Module documentation
 - `demo_shorts.py` - Demo script
