@@ -122,5 +122,6 @@
     "Task completed!": "Задача выполнена!",
     "Task stopped": "Задача остановлена",
     "Task error": "Ошибка задачи",
-    "OK": "OK"
+    "OK": "OK",
+    "Cutting, aligning, and generating subtitle timeline": "Разделение, выравнивание и генерация таймлайна субтитров"
 }

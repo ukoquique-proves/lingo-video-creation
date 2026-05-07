@@ -122,5 +122,6 @@
     "Task completed!": "任务完成！",
     "Task stopped": "任务已停止",
     "Task error": "任务出错",
-    "OK": "确定"
+    "OK": "确定",
+    "Cutting, aligning, and generating subtitle timeline": "切割、对齐并生成字幕时间轴"
 }

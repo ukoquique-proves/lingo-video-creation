@@ -36,7 +36,7 @@ def update_key(key, new_value):
             if isinstance(current, dict) and k in current:
                 current = current[k]
             else:
-                return False
+                raise KeyError(f"Intermediate key '{k}' not found in configuration")
 
         if isinstance(current, dict) and keys[-1] in current:
             current[keys[-1]] = new_value

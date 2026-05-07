@@ -122,5 +122,6 @@
     "Task completed!": "タスク完了！",
     "Task stopped": "タスクが停止されました",
     "Task error": "タスクエラー",
-    "OK": "OK"
+    "OK": "OK",
+    "Cutting, aligning, and generating subtitle timeline": "切断、整列、字幕タイムライン生成"
 }

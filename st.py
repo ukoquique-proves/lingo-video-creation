@@ -135,9 +135,8 @@ def text_processing_section():
             1. {t("WhisperX word-level transcription")}<br>
             2. {t("Sentence segmentation using NLP and LLM")}<br>
             3. {t("Summarization and multi-step translation")}<br>
-            4. {t("Cutting and aligning long subtitles")}<br>
-            5. {t("Generating timeline and subtitles")}<br>
-            6. {t("Merging subtitles into the video")}
+            4. {t("Cutting, aligning, and generating subtitle timeline")}<br>
+            5. {t("Merging subtitles into the video")}
         """,
             unsafe_allow_html=True,
         )
@@ -199,7 +198,8 @@ def audio_processing_section():
             1. {t("Generate audio tasks and chunks")}<br>
             2. {t("Extract reference audio")}<br>
             3. {t("Generate and merge audio files")}<br>
-            4. {t("Merge final audio into video")}
+            4. {t("Merge full audio")}<br>
+            5. {t("Merge final audio into video")}
         """,
             unsafe_allow_html=True,
         )
@@ -235,6 +235,12 @@ def audio_processing_section():
 # ─── Main ───
 
 
+def shorts_creator_section():
+    """Shorts Creator section with tabbed interface."""
+    from shorts_creator.shorts_ui import shorts_creator_page
+    shorts_creator_page()
+
+
 def main():
     logo_col, _ = st.columns([1, 1])
     with logo_col:
@@ -251,9 +257,17 @@ def main():
     with st.sidebar:
         page_setting()
         st.markdown(give_star_button, unsafe_allow_html=True)
-    download_video_section()
-    text_processing_section()
-    audio_processing_section()
+    
+    # Create tabs for Video Translation and Shorts Creator
+    tab1, tab2 = st.tabs([t("Video Translation & Dubbing"), "🎬 AI Shorts Creator"])
+    
+    with tab1:
+        download_video_section()
+        text_processing_section()
+        audio_processing_section()
+    
+    with tab2:
+        shorts_creator_section()
 
 
 if __name__ == "__main__":
