@@ -9,6 +9,11 @@
   - Replaced deprecated v1 method-chaining API with v2 API
   - Simplified to v2-only code (no backward compatibility checks)
   - Fixed TextClip: `fontsize` → `font_size` (snake_case)
+  - Fixed TextClip: `align` → `text_align` (v2 requirement)
+  - Removed deprecated `transparent` argument from TextClip
+  - Fixed TextClip: moved `duration` from constructor to `.with_duration()` (v2 requirement)
+  - Added explicit font path to `VideoConfig` and `TextClip` to prevent "Invalid font" errors on Linux
+  - Switched `TextClip` calls to use keyword arguments for better compatibility with MoviePy v2
 - **Quick Create UI** in `shorts_creator/shorts_ui.py`
   - Separated "Tone" (script style) from "Voice" (TTS voice name)
   - Added proper voice selection dropdown with Edge TTS voices
@@ -24,6 +29,13 @@
 - **Config update consistency** in `core/utils/config_utils.py`
   - `update_key()` now raises `KeyError` for missing intermediate keys (was silent `False`)
   - Consistent error handling for both intermediate and final missing keys
+- **Reference-before-assignment bug** in `shorts_creator/video_assembler.py`
+  - Fixed `_add_captions()`: `txt.h` was used before `txt` object existed
+  - Split TextClip creation and positioning into two separate lines
+- **Project Configuration Defaults** in `config.yaml`
+  - Switched `display_language` and `target_language` to English for educational video creation
+  - Set `tts_method` to `edge_tts` and updated default voice to `en-US-GuyNeural` for free, high-quality English voiceovers
+  - Disabled `demucs` by default to streamline workflow and reduce dependency overhead
 
 ### Added
 - **AI Shorts Creator Module** - Complete short-form video creation system
@@ -32,6 +44,10 @@
   - `shorts_creator/video_assembler.py` - TikTok/Reels format video assembly
   - `shorts_creator/shorts_workflow.py` - Complete automated workflow
   - `shorts_creator/shorts_ui.py` - Streamlit user interface
+- **Manual Video Creation Script** - `create_puppy_linux_video.py`
+  - Added a specialized script to generate a video about PuppyLinux advantages
+  - Bypasses LLM API requirement by providing a pre-defined script structure
+  - Demonstrates end-to-end workflow (TTS, AI Images, Assembly) using free tools
 
 ### Features
 - **Script Generation**

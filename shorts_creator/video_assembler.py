@@ -39,6 +39,7 @@ class VideoConfig:
     bitrate: str = '8000k'
     
     # Text settings
+    font: str = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
     font_size: int = 48
     font_color: str = 'white'
     stroke_color: str = 'black'
@@ -161,9 +162,9 @@ class VideoAssembler:
         font_size = font_size or self.config.font_size
         
         txt_clip = TextClip(
-            text, font_size=font_size, color=self.config.font_color,
+            text=text, font=self.config.font, font_size=font_size, color=self.config.font_color,
             stroke_color=self.config.stroke_color, stroke_width=self.config.stroke_width,
-            method='caption', size=(self.config.width - 100, None), align='center'
+            method='caption', size=(self.config.width - 100, None), text_align='center'
         ).with_duration(duration)
         
         # Position
@@ -233,7 +234,7 @@ class VideoAssembler:
             else:
                 clip = clip.with_subclip(0, duration)
         else:
-            clip = ImageClip(file_path, duration=duration)
+            clip = ImageClip(file_path).with_duration(duration)
             clip = self._resize_to_portrait(clip)
         
         # Add fade effects
@@ -272,10 +273,11 @@ class VideoAssembler:
         for i, clip in enumerate(clips):
             if i < len(segments) and segments[i].get('text'):
                 txt = TextClip(
-                    segments[i]['text'], font_size=self.config.font_size,
+                    text=segments[i]['text'], font=self.config.font,
+                    font_size=self.config.font_size,
                     color=self.config.font_color, stroke_color=self.config.stroke_color,
                     stroke_width=self.config.stroke_width, method='caption',
-                    size=(self.config.width - 100, None), align='center'
+                    size=(self.config.width - 100, None), text_align='center'
                 ).with_duration(clip.duration)
                 txt = txt.with_position(
                     ('center', self.config.height - self.config.caption_margin - txt.h)
@@ -304,8 +306,8 @@ class VideoAssembler:
         """Add watermark to video."""
         text = text or "Created with VideoLingo"
         watermark = TextClip(
-            text, font_size=24, color='white',
-            stroke_color='black', stroke_width=1, transparent=True
+            text=text, font=self.config.font, font_size=24, color='white',
+            stroke_color='black', stroke_width=1
         ).with_duration(video.duration).with_position(('right', 'bottom'))
         
         return CompositeVideoClip([video, watermark])
